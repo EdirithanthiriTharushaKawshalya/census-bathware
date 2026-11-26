@@ -67,6 +67,8 @@ Guest enquiries remain disabled. Only after business approval, change the single
 
 ## Local database verification
 
+For a full demo account/shop/product setup, follow [demo-setup.md](docs/demo-setup.md). Its two scripts live under `supabase/demo/` and are run manually in the chosen demo project, never automatically during migration. The local PostgreSQL verifier also checks that this pack can be run twice and that buyer/representative/delivery permissions stay separate.
+
 With Docker Desktop running and the Supabase CLI installed:
 
 ```powershell

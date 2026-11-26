@@ -23,6 +23,25 @@ try {
   if ($LASTEXITCODE -ne 0) { throw 'Development seed failed' }
   & $psql @connection -f (Join-Path $workspace 'supabase/tests/authorization.sql')
   if ($LASTEXITCODE -ne 0) { throw 'SQL authorization tests failed' }
+  & $psql @connection -f (Join-Path $workspace 'supabase/tests/standalone-demo-setup.sql')
+  if ($LASTEXITCODE -ne 0) { throw 'Demo setup checks failed' }
+  # Execute each setup block and its result query in separate connections.
+  # This catches accidental dependencies on connection-local temporary tables.
+  foreach ($demoFile in (Get-ChildItem -LiteralPath (Join-Path $workspace 'supabase/demo') -Filter '*.sql' | Sort-Object Name)) {
+    $demoText = [System.IO.File]::ReadAllText($demoFile.FullName)
+    $blockEnd = 'end $census_demo$;'
+    $blockPosition = $demoText.IndexOf($blockEnd)
+    if ($blockPosition -lt 0 -or $demoText -match '(?i)create\s+temp(?:orary)?\s+table') { throw 'Demo setup must be a self-contained SQL block' }
+    $splitPosition = $blockPosition + $blockEnd.Length
+    $blockPath = Join-Path $cluster ($demoFile.BaseName + '-block.sql')
+    $reviewPath = Join-Path $cluster ($demoFile.BaseName + '-review.sql')
+    [System.IO.File]::WriteAllText($blockPath, $demoText.Substring(0,$splitPosition))
+    [System.IO.File]::WriteAllText($reviewPath, $demoText.Substring($splitPosition))
+    & $psql @connection -f $blockPath
+    if ($LASTEXITCODE -ne 0) { throw 'Standalone demo block failed' }
+    & $psql @connection -f $reviewPath
+    if ($LASTEXITCODE -ne 0) { throw 'Independent demo result query failed' }
+  }
   Write-Output 'Standalone PostgreSQL tests passed. Supabase Auth, PostgREST, and Storage integration still require a connected Supabase instance.'
 } finally {
   & (Join-Path $PostgresBin 'pg_ctl.exe') -D $cluster -m fast -w stop
