@@ -32,3 +32,7 @@ Reports aggregate in SQL over all permitted records, separately by order date an
 ## Limits requiring operational follow-up
 
 The standalone PostgreSQL suite verifies real migrations, SQL transactions and RLS using minimal test implementations of Supabase's auth/storage schemas. It cannot verify Auth login, SSR cookie refresh, PostgREST relationship inference, object uploads or deployed service integration. Connected Supabase acceptance checks remain required. The catalogue is paginated at 24 products; other list screens cap parent results at 500 and nested PostgREST arrays are subject to its configured row cap; database reports are not based on these capped lists. Pagination and accounting-document export should be expanded if that scale is expected. There are no online payments, email automation, inventory movements or credit formulas.
+
+## Mobile application
+
+`mobile/src` contains the bundled Capacitor React interface; `android` and `ios` contain native projects. Vite builds the mobile client separately from Next.js, reusing shared domain types, role capabilities and monetary rules. The phone uses only the publishable key and user session with the same RLS/RPC boundaries. Sessions live in memory. Only image processing uses the hosted Next.js bearer-authenticated endpoint at `/api/mobile/catalogue-image`; its server-only storage writer is never bundled. See [mobile operations and release guide](mobile-app.md).

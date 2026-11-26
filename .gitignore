@@ -42,3 +42,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Capacitor generated assets and local native tooling
+/mobile/dist/
+/mobile/node_modules/
+/android/.gradle/
+/android/.idea/
+/android/captures/
+/android/local.properties
+/android/**/build/
+/android/app/src/main/assets/public/
+/android/app/src/main/assets/capacitor.config.json
+/android/app/src/main/assets/capacitor.plugins.json
+/ios/App/App/public/
+/ios/App/App/capacitor.config.json
+/ios/App/Pods/
+/ios/App/build/
+**/DerivedData/
+**/xcuserdata/
+*.keystore
+*.jks
+key.properties

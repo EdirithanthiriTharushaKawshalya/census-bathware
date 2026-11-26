@@ -4,6 +4,8 @@ A Next.js 16.4.6 App Router trade portal using TypeScript, Tailwind CSS, npm, an
 
 ## Existing project: security and image upgrade
 
+The website also has a bundled Capacitor mobile app for Android and iPhone. See [mobile setup, Android APK, iPhone build and release checks](docs/mobile-app.md). Existing Next.js commands still run the website. Use `npm run mobile:dev` for mobile preview or `npm run mobile:apk` to create a test Android APK.
+
 If you already ran the original three migrations, run **only** `supabase/migrations/202611260001_security_and_images.sql` in the trusted Supabase SQL Editor. Do not rerun the old migrations. The new migration is required for protected sign-in, paginated catalogue browsing and optimized uploads.
 
 Add a **fresh** server-only secret to your existing ignored `.env.local` (preserve the URL and publishable key):

@@ -11,10 +11,27 @@
     "test": "tsx --conditions=react-server --test tests/*.test.ts",
     "test:db": "node scripts/db-tests.mjs",
     "test:browser": "playwright test",
-    "format": "prettier --write src tests scripts/*.mjs playwright.config.ts next.config.ts package.json README.md docs/*.md",
-    "format:check": "prettier --check src tests scripts/*.mjs playwright.config.ts next.config.ts package.json README.md docs/*.md"
+    "format": "prettier --write src tests mobile/src mobile/tests mobile/*.ts mobile/*.json mobile/*.html scripts/*.mjs capacitor.config.ts playwright.config.ts next.config.ts package.json README.md docs/*.md",
+    "format:check": "prettier --check src tests mobile/src mobile/tests mobile/*.ts mobile/*.json mobile/*.html scripts/*.mjs capacitor.config.ts playwright.config.ts next.config.ts package.json README.md docs/*.md",
+    "mobile:dev": "vite --config mobile/vite.config.ts",
+    "mobile:typecheck": "tsc --project mobile/tsconfig.json --noEmit",
+    "mobile:build": "npm run mobile:typecheck && vite build --config mobile/vite.config.ts && node scripts/verify-mobile-bundle.mjs",
+    "mobile:sync": "npm run mobile:build && cap sync",
+    "mobile:android": "npm run mobile:sync && cap open android",
+    "mobile:ios": "npm run mobile:sync && cap open ios",
+    "mobile:apk": "npm run mobile:sync && node scripts/android-build.mjs",
+    "mobile:icons": "node scripts/mobile-icons.mjs",
+    "mobile:test": "playwright test --config mobile/playwright.config.ts"
   },
   "dependencies": {
+    "@capacitor/android": "^8.6.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.6.3",
+    "@capacitor/ios": "^8.6.3",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/share": "^8.0.3",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.119.2",
     "next": "16.4.6",
@@ -25,17 +42,20 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.6.3",
     "@playwright/test": "^1.65.1",
     "@tailwindcss/turbopack": "4.3.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.3.0",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.4.6",
     "prettier": "^3.10.1",
     "tailwindcss": "4.3.3",
     "tsx": "^4.23.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^8.4.0"
   }
 }

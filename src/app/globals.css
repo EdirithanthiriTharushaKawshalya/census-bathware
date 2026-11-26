@@ -1422,6 +1422,151 @@ table {
 .signin-aside .brand-logo {
   width: 180px;
 }
+/* Phone and tablet corrections; retain the established desktop design. */
+@media (max-width: 760px) {
+  .sidebar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px 16px;
+    align-items: center;
+  }
+  .sidebar .brand {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    max-width: 100%;
+  }
+  .sidebar-user {
+    position: static;
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+  }
+  .sidebar-user > div {
+    max-width: none;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .sidebar > form {
+    position: static;
+    grid-column: 2;
+    grid-row: 1 / 3;
+  }
+  .sidebar > form button {
+    min-height: 44px;
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+  .sidebar nav {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    min-width: 0;
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+  }
+  .sidebar nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+  .hero-copy h1 {
+    font-size: clamp(2.5rem, 11vw, 3.9rem);
+    overflow-wrap: break-word;
+  }
+  .hero-actions,
+  .record-header,
+  .delivery-line {
+    flex-wrap: wrap;
+  }
+  .hero-actions .text-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .public-header .button.small {
+    min-height: 44px;
+    padding-inline: 12px;
+  }
+  .record-header > *,
+  .record-actions > *,
+  .form-grid > *,
+  .split > *,
+  .dashboard-grid > *,
+  .catalogue-grid > * {
+    min-width: 0;
+  }
+  .panel,
+  .record,
+  .record-meta,
+  .page-title,
+  .workspace-main {
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .form input,
+  .form select,
+  .form textarea {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 16px;
+    min-height: 46px;
+  }
+  .form input[type="checkbox"] {
+    min-height: 20px;
+    flex-shrink: 0;
+  }
+  .filters label {
+    min-width: 0;
+    flex-basis: calc(50% - 14px);
+  }
+  .filters .button {
+    width: 100%;
+  }
+  .table-scroll {
+    max-width: 100%;
+    min-width: 0;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-scroll table {
+    min-width: 520px;
+  }
+  .chart-row {
+    grid-template-columns: 70px minmax(20px, 1fr) minmax(75px, auto);
+  }
+  .workspace-header {
+    gap: 10px;
+  }
+}
+@media (max-width: 380px) {
+  .container {
+    padding-inline: 18px;
+  }
+  .workspace-main {
+    padding-inline: 16px;
+  }
+  .panel {
+    padding: 18px;
+  }
+  .public-header {
+    gap: 10px;
+  }
+  .public-header .brand-logo {
+    width: 100px;
+  }
+  .public-header .button.small {
+    font-size: 0.75rem;
+  }
+  .signin-main {
+    padding-inline: 18px;
+  }
+  .order-pick {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 76px;
+    gap: 12px;
+  }
+}
 @media (max-width: 760px) {
   .brand-logo,
   .signin-aside .brand-logo,

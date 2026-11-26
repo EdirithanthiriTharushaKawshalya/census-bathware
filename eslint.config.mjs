@@ -12,7 +12,12 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "mobile/dist/**",
+    "android/**",
+    "ios/**",
+    ".tmp/**",
   ]),
+  { files: ["mobile/**/*.tsx"], rules: { "@next/next/no-img-element": "off" } },
 ]);
 
 export default eslintConfig;
