@@ -11,7 +11,7 @@ export async function proxy(request: NextRequest) {
     process.env.NODE_ENV !== "development"
   ) {
     return new NextResponse(
-      '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | Census Bathware</title><link rel="icon" href="/census-mark.svg"></head><body style="margin:0;background:#fbfcfa;color:#183f39;font:16px/1.65 Arial,sans-serif"><main style="max-width:800px;margin:15vh auto;padding:24px"><p>CENSUS BATHWARE / 404</p><h1 style="font:48px Georgia,serif">A little off track.</h1><p>We couldn’t find that page.</p><a href="/" style="color:inherit">Back to Census</a></main></body></html>',
+      '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | Census Bathware</title><link rel="icon" href="/census-favicon.png"></head><body style="margin:0;background:#fbfcfa;color:#183f39;font:16px/1.65 Arial,sans-serif"><main style="max-width:800px;margin:15vh auto;padding:24px"><p>CENSUS BATHWARE / 404</p><h1 style="font:48px Georgia,serif">A little off track.</h1><p>We couldn’t find that page.</p><a href="/" style="color:inherit">Back to Census</a></main></body></html>',
       {
         status: 404,
         headers: {

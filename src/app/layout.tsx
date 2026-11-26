@@ -3,7 +3,9 @@ import { Suspense } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  icons: { icon: "/census-logo.png" },
+  icons: {
+    icon: { url: "/census-favicon.png", type: "image/png", sizes: "256x256" },
+  },
   title: {
     default: "Census Bathware | Made for everyday living",
     template: "%s | Census Bathware",
